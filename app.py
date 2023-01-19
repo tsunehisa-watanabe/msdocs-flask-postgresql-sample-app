@@ -38,11 +38,6 @@ from models import Restaurant, Review
 def index():
     print('Request for index page received')
     restaurants = Restaurant.query.all()    
-    text_input = request.args.get('search')
-    if text_input is None or len(text_input) == 0:
-        tweets = Tweet.query.all()
-    else:
-        tweets = db.session.query(Tweet).filter(or_(Tweet.body.like(text_input), Tweet.title.like(text_input))).all()
     return render_template('index.html', restaurants=restaurants)
 
 @app.route('/<int:id>', methods=['GET'])
